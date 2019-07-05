@@ -48,3 +48,7 @@ Now we can run `$ vagrant up && vagrant ssh`, which will provision the box, and 
 You can quickly check that things are working correctly by running `$ npm test` in our ssh terminal. To get out of the ssh session, run `$ exit`.
 
 The box continues to run in the background. If you want to stop it, run `$ vagrant suspend`. To remove it completely, run `$ vagrant destroy`.
+
+## Branch - add-ci
+
+Switch to this branch to continue.
