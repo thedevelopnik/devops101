@@ -1,0 +1,32 @@
+{
+  "name": "devops101",
+  "version": "1.0.0",
+  "description": "An app used for demonstrating devops tools and principles",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec src/index.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thedevelopnik/devops101.git"
+  },
+  "keywords": [
+    "devops"
+  ],
+  "author": "Dave Sudia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thedevelopnik/devops101/issues"
+  },
+  "homepage": "https://github.com/thedevelopnik/devops101#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": "^10"
+  }
+}
