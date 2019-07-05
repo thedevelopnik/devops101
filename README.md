@@ -63,3 +63,11 @@ is and important part of understanding CI. They also offer good
 default Docker containers to run jobs in, and templates for
 initial configuration for most languages. We'll use their template
 for Node to get started with CI.
+
+Now every commit we push to Github will have tests automaticall run.
+We can also configure our Github repo to prevent merges unless
+the tests in our CI process pass.
+
+## Branch - containerize-it
+
+Check out that branch to continue
