@@ -51,4 +51,15 @@ The box continues to run in the background. If you want to stop it, run `$ vagra
 
 ## Branch - add-ci
 
-Switch to this branch to continue.
+Now we're going to add a configuration file for our Continuous Integration service.
+
+Continuous Integration means that all code is vetted and tested automatically before it gets merged in to a critical branch like master. There are several services like CircleCI, TravisCI, and GitLab. They are all similar in how they are configured, but each
+service has it's own specific settings. We'll use Circle for this
+project.
+
+We'll use Circle. Circle offers workflows made of multiple jobs.
+Each job runs in a Docker container, so understanding Docker
+is and important part of understanding CI. They also offer good
+default Docker containers to run jobs in, and templates for
+initial configuration for most languages. We'll use their template
+for Node to get started with CI.
