@@ -127,4 +127,32 @@ Now we have continuous arifact building, and we're ready to move to deployment!
 
 ## Branch - infrastructure
 
+As with everything we've done, creating our infrastructure will be done through code, so it is
+reproducible and the history can be tracked (via git!). We will be using another OSS tool from Hashi,
+[Terraform](https://www.terraform.io/), to create a tiny Kubernetes cluster on our local machine.
+
+### Installing terraform and minikube
+
+First, we should add `terraform` and `minikube` to our brew_installs script. For terraform, we will install
+`terraform@0.11` as it is compatible with a plugin we will need to interact with `minikube`.
+
+Since Terraform 0.11 is an old version, brew does not automatically put it on your path. It will output some instructions to do so.
+
+Additionally, the plugin terraform-provider-minikube is not part of their official repos. You have to install
+a release binary to use it. I have pre-committed it into this branch, and you can grab it from there, and
+put it in the same file structure as in this branch.
+
+### Creating the infrastructure
+
+We'll make a `main.tf` file, and put some pretty basic configuration code in it. It will bring up our
+minikube cluster repeatably, and allow us to change the config and apply those changes in a controlled way.
+
+Terraform lets us plan our changes before we make them. To do this run `$ terraform plan` in the infra directory. You'll see that terraform wants to create a single resource, a minikube cluster, and show the config that will be applied.
+
+NOTE: this process is not working correctly. Terraform is great; community plugins can sometimes be finicky.
+I'm keeping it here as a reference, but in the meantime, just
+`$ brew cask install minikube && minikube start`
+
+## Defining the deployment
+
 Checkout this branch to continue.
