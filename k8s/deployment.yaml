@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops101
+  labels:
+    app: devops101
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops101
+  template:
+    metadata:
+      labels:
+        app: devops101
+    spec:
+      containers:
+      - name: node-server
+        image: thedevelopnik/devops101:containerize-it-e3c1af1
+        ports:
+        - containerPort: 6000
+        resources:
+          requests:
+            cpu: 200m
+            memory: 500Mi
+          limits:
+            cpu: 500m
+            memory: 800Mi

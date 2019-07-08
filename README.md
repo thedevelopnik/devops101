@@ -153,6 +153,6 @@ NOTE: this process is not working correctly. Terraform is great; community plugi
 I'm keeping it here as a reference, but in the meantime, just
 `$ brew cask install minikube && minikube start`
 
-## Defining the deployment
+## Branch - deployment
 
-Checkout this branch to continue.
+
