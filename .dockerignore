@@ -1,0 +1,7 @@
+node_modules/
+.vagrant/
+.circleci/
+.gitignore
+brew_installs.sh
+README.md
+Vagrantfile

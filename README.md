@@ -70,4 +70,61 @@ the tests in our CI process pass.
 
 ## Branch - containerize-it
 
-Check out that branch to continue
+Now we're going to get our application ready to run in a Docker container.
+
+We'll be building it from scratch so we can follow a few security best practices.
+
+First, we'll start with a base image of Alpine 3.10. Alpine Linux is a distribution
+focused on having minimal size. The base container is about 5MB. This helps the
+distribution realities of our container, as it keeps it smaller (the base Ubuntu image
+is about 900MB) and also provides a smaller attack surface.
+
+We're going with Alpine 3.10 not only because it has the latest patches for the OS itself,
+but also for any packages it will download. You can explore available packages per Alpine
+version at the [Alpine APK Repo site](https://pkgs.alpinelinux.org/packages). Since we're
+working with Node 10.16 in the rest of our process, we want to use it in our final production
+build. Alpine 3.10 is the only version of Alpine with 10.16 available.
+
+Install the nodejs and npm packages.
+
+Now we're going to do something you don't see in a lot of public Docker images.
+We'll create a group and a user called `app`. We'll also make a directory at `/app`
+and give ownership of that directory to the `app` group and user. Down below
+you'll see that eventually we become that user in the container before running
+our final command. This is so that if anyone got access to the container at runtime, they
+have access to a user with no root or sudo privileges. This is a super low-cost way
+to improve the security of your container.
+
+Now we copy over our dependency definition files and then `$ npm install --production`.
+We copy these over separately because they change less often than our app files. This
+saves us build time when we're developing. We use `--production` on our install
+so that we don't install unncessary testing packages to save space and time.
+
+Similarly, we remove the npm package after we've installed, as it's no longer necessary.
+
+Finally, we assume the `app` user role, COPY over the src directory, and run our app.
+
+You can build this container image by running `$ docker build -t test .` and then run it
+with `$ docker run -p 6000:6000 test`. Now you can test it by doing `$ curl localhost:6000/`.
+
+### Continuous Builds
+
+It's great that we have this container file, but we want it to be available for deployment!
+Our next step is to make it build continuously as part of our CI process. A common pattern
+you'll find is to have your CI process result in some artifact (a container, a binary, a JAR, etc)
+and then some other process takes that artifact and deploys it. That is the pattern we will follow.
+
+As usual, we will script out the publish process to keep it consistent, and to keep our Circle config clean.
+Check the publish_docker.sh script for content.
+
+To publish, we will need a username and password. These will be env variables kept in CircleCI (which does
+not allow them to be user-readable in the jobs, but allows them to exist as env vars for the builds to use).
+
+We will tag each image with the branch and git SHA. That way each build tag is immutable, and it's easy to
+trace a container back to the code that is running in it.
+
+Now we have continuous arifact building, and we're ready to move to deployment!
+
+## Branch - infrastructure
+
+Checkout this branch to continue.
