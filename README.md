@@ -155,4 +155,22 @@ I'm keeping it here as a reference, but in the meantime, just
 
 ## Branch - deployment
 
+Finally, we will define our files for Kubernetes (k8s). Going deep into k8s is beyond this exercise,
+so for now we'll just know that most app deployments on k8s require a Deployment object, and a Service object.
 
+Both are defined in YAML, so we'll make a `deployment.yaml` file and a `service.yaml` file in a `k8s/` directory.
+
+Check the files in this branch for content. As with everything, we'll write a script to `$ kubectl apply`
+both files. This script could then be run on a Continuous Deployment platform, or we can run it ourselves.
+
+There are numerous ways to templatize these files, for example to make the container tag variable rather than
+hard-coded. For now we'll hard code it. If we run our script, we should be able to run `$ minikube service list`
+and get a list of services in our cluster, and their address. We can then run `$ curl <address>/` and we should
+get "ok" back from our server, showing that our deployment is successful.
+
+Great job! You've created a basic version of a modern CI/CD pipeline, and gotten exposure to lots of
+different technologies. Keep in mind is that the specific tech in these roles
+could have been BitBucket with Jenkins and a homegrown deployment server, or Gitlab and Google Kubernetes Engine, or whatever. You might be deploying a monolith or a multitude of microservices. The important thing
+as a developer is that you understand how your application is getting to production, and how it runs there.
+Then you can write for that use case, keep environments and tools consistent, avoid surprises, and improve
+your ability to debug when a problem occurs.
